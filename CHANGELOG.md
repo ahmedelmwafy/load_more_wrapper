@@ -1,3 +1,6 @@
-## 0.0.1
+# Changelog
 
-* TODO: A stateless and reusable Flutter widget to add load-more functionality to scrollable widgets.
+## [1.0.0] - 2025-05-20
+- Initial release of load_more_wrapper package.
+- Stateless LoadMoreWrapper widget with optional animated loader.
+- Supports ListView, GridView, and any scrollable widget.
