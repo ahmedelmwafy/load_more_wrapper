@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LoadMoreWrapper extends StatelessWidget {
@@ -23,10 +22,12 @@ class LoadMoreWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
-        final isScrollEnd = notification is ScrollEndNotification;
-        final isNearBottom = notification.metrics.extentAfter < 500;
+        final isNearBottom = notification.metrics.extentAfter < 300;
 
-        if (isScrollEnd && isNearBottom && hasMore && !isLoading) {
+        if ((notification is ScrollUpdateNotification || notification is ScrollEndNotification) &&
+            isNearBottom &&
+            hasMore &&
+            !isLoading) {
           onLoadMore();
         }
         return false;
