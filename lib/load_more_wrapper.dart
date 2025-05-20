@@ -9,25 +9,20 @@ class LoadMoreWrapper extends StatelessWidget {
   final Widget? footerBuilder;
 
   const LoadMoreWrapper({
-    Key? key,
+    super.key,
     required this.child,
     required this.onLoadMore,
     required this.isLoading,
     required this.hasMore,
     this.showDefaultLoading = true,
     this.footerBuilder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
-        final isNearBottom = notification.metrics.extentAfter < 300;
-
-        if ((notification is ScrollUpdateNotification || notification is ScrollEndNotification) &&
-            isNearBottom &&
-            hasMore &&
-            !isLoading) {
+        if (notification.metrics.extentAfter < 300 && !isLoading && hasMore) {
           onLoadMore();
         }
         return false;
