@@ -21,7 +21,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  load_more_wrapper: ^2.0.0
+  load_more_wrapper: ^3.0.0
 ```
 
 Then run:
@@ -131,4 +131,3 @@ Feel free to open issues or contribute!
 
 ---
 
-If you want me to generate the full package folder zipped or help with publishing steps, just ask!
