@@ -21,7 +21,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  load_more_wrapper: ^5.0.0
+  load_more_wrapper: ^6.0.0
 ```
 
 Then run:

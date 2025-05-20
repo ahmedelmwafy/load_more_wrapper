@@ -7,6 +7,7 @@ class LoadMoreWrapper extends StatelessWidget {
   final bool hasMore;
   final bool showDefaultLoading;
   final Widget? footerBuilder;
+  final Widget? customLoader; // ✅ New loader widget
 
   const LoadMoreWrapper({
     super.key,
@@ -16,6 +17,7 @@ class LoadMoreWrapper extends StatelessWidget {
     required this.hasMore,
     this.showDefaultLoading = true,
     this.footerBuilder,
+    this.customLoader, // ✅ Include in constructor
   });
 
   @override
@@ -40,20 +42,30 @@ class LoadMoreWrapper extends StatelessWidget {
   }
 
   Widget? _buildFooter() {
-    if (isLoading && showDefaultLoading) {
-      return const Padding(
-        key: ValueKey('loader'),
-        padding: EdgeInsets.all(16),
-        child: Center(child: CircularProgressIndicator()),
-      );
-    } else if (!hasMore && footerBuilder != null) {
+    if (isLoading) {
+      if (customLoader != null) {
+        return Padding(
+          key: const ValueKey('custom_loader'),
+          padding: const EdgeInsets.all(16),
+          child: Center(child: customLoader),
+        );
+      } else if (showDefaultLoading) {
+        return const Padding(
+          key: ValueKey('default_loader'),
+          padding: EdgeInsets.all(16),
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
+    }
+
+    if (!hasMore && footerBuilder != null) {
       return Container(
         key: const ValueKey('footer'),
         padding: const EdgeInsets.all(16),
         child: footerBuilder,
       );
-    } else {
-      return const SizedBox.shrink(key: ValueKey('empty'));
     }
+
+    return const SizedBox.shrink(key: ValueKey('empty'));
   }
 }
